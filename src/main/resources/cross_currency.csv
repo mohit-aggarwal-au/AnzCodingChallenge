@@ -1,0 +1,7 @@
+from_currency, to_currency, cross_currency
+CZK, DKK, EUR
+CZK, NOK, EUR
+CZK, USD, EUR
+DKK, NOK, EUR
+DKK, USD, EUR
+NOK, USD, EUR
