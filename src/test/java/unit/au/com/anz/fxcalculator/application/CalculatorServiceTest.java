@@ -1,5 +1,6 @@
-package unit.application;
+package unit.au.com.anz.fxcalculator.application;
 
+import au.com.anz.fxcalculator.application.FxCalculator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

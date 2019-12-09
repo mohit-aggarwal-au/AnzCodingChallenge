@@ -1,4 +1,4 @@
-package unit.application;
+package au.com.anz.fxcalculator.application;
 
 import au.com.anz.fxcalculator.model.Currency;
 import au.com.anz.fxcalculator.model.InputDetails;
