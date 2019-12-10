@@ -66,7 +66,7 @@ public class ReadFileUtil {
     private static String[] getLineContent(String line, int expectedParameters, String fileName) {
         String[] lineContent = line.split(Utility.COMMA);
         if (lineContent.length != expectedParameters) {
-            throw new InvalidParameterException("Exception occurred while parsing transactions file :" + fileName + " file format is not correct");
+            throw new InvalidParameterException(String.format("Exception occurred while parsing transactions file:%s file format is not correct", fileName));
         }
         return lineContent;
     }
@@ -80,7 +80,9 @@ public class ReadFileUtil {
             }
             Path path = Paths.get(resourceURL.toURI());
             lines = Files.readAllLines(path, StandardCharsets.UTF_8);
-            //TODO: Do null check and all
+            if (lines.size() < 2) {
+                throw new InvalidParameterException(String.format("Input file:%s format is not correct", fileName));
+            }
             lines.remove(0);
 
         } catch (IOException | URISyntaxException exception) {

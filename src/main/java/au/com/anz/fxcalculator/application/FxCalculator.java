@@ -31,7 +31,7 @@ public class FxCalculator {
             inputDetails = new InputDetails(fromCurrency, toCurrency, amountToBeConverted);
 
         } catch (NumberFormatException exception) {
-            System.out.print(String.format("Exception occurred while parsing input amount:" + exception.getMessage()));
+            throw new InvalidParameterException("Exception occurred while parsing amount to be converted:" + exception.getMessage());
         } catch (IllegalArgumentException exception) {
             System.out.print(String.format("Unable to find rate for %s/%s", args[0].trim().toUpperCase(), args[3].trim().toUpperCase()));
             return null;

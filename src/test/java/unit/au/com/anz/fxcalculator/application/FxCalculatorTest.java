@@ -66,13 +66,6 @@ public class FxCalculatorTest {
         assertTrue(exception.getMessage().contains("Input parameters are not correct"));
     }
 
-    static Stream<Arguments> incorrectNumberOfParameterValue() {
-        return Stream.of(
-                Arguments.of((Object) new String[]{"AUD", "100.00", "in", "DKK", "extra_parameter"}),
-                Arguments.of((Object) new String[]{"KRW", "100.00", "FJD"})
-        );
-    }
-
     @ParameterizedTest
     @MethodSource("invalidParameterValue")
     public void fxCalculator_withInvalidParameterValue_throwsException(String[] input) {
@@ -80,6 +73,30 @@ public class FxCalculatorTest {
                 FxCalculator.main(input), "Expected to throw InvalidParameterException, but didn't throw it");
         exception.getMessage();
         assertTrue(exception.getMessage().contains("Exception occurred while parsing input values"));
+    }
+
+    @Test
+    public void fxCalculator_withInvalidAmount_throwsException() {
+        InvalidParameterException exception = assertThrows(InvalidParameterException.class, () ->
+                FxCalculator.main(new String[]{"AUD", "1@#.#$", "in", "NOK"}), "Expected to throw InvalidParameterException, but didn't throw it");
+        exception.getMessage();
+        assertTrue(exception.getMessage().contains("Exception occurred while parsing amount to be converted"));
+    }
+
+    @Test
+    public void fxCalculator_withNullParameters_throwsException() {
+        InvalidParameterException exception = assertThrows(InvalidParameterException.class, () ->
+                FxCalculator.main(null), "Expected to throw InvalidParameterException, but didn't throw it");
+        exception.getMessage();
+        assertTrue(exception.getMessage().contains("Input parameters are not correct"));
+    }
+
+
+    static Stream<Arguments> incorrectNumberOfParameterValue() {
+        return Stream.of(
+                Arguments.of((Object) new String[]{"AUD", "100.00", "in", "DKK", "extra_parameter"}),
+                Arguments.of((Object) new String[]{"KRW", "100.00", "FJD"})
+        );
     }
 
     static Stream<Arguments> invalidParameterValue() {
