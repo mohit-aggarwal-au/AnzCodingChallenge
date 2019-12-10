@@ -1,0 +1,7 @@
+from_currency, to_currency, amount, converted_amount
+AUD, USD, 100.00, 83.71
+USD, AUD, 100.00, 119.46
+AUD, DKK, 100.00, 505.73
+DKK, AUD, 100.00, 19.77
+AUD, NOK, 100.00, 588.97
+NOK, AUD, 100.00, 16.98

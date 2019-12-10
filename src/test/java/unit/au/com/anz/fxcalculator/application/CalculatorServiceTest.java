@@ -1,37 +1,38 @@
 package unit.au.com.anz.fxcalculator.application;
 
-import au.com.anz.fxcalculator.application.FxCalculator;
+import au.com.anz.fxcalculator.application.CalculatorService;
+import au.com.anz.fxcalculator.model.Currency;
+import au.com.anz.fxcalculator.model.InputDetails;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.stream.Stream;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CalculatorServiceTest {
 
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-    private final PrintStream originalErr = System.err;
+    private CalculatorService calculatorService = new CalculatorService();
 
-    @BeforeEach
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
-    }
+    @ParameterizedTest
+    @CsvFileSource(resources = "/calculator_service_test.csv", numLinesToSkip = 1)
+    void calculatorService_wuthVaidValues_returnsSuccess(String fromCurrencyString, String toCurrencyString, String amount, String expected) {
+        Currency fromCurrency = Currency.valueOf(fromCurrencyString);
+        Currency toCurrency = Currency.valueOf(toCurrencyString);
+        BigDecimal amountToBeConverted = new BigDecimal(amount).setScale(2, RoundingMode.HALF_UP);
+        InputDetails inputDetails  = new InputDetails(fromCurrency, toCurrency, amountToBeConverted);
+        assertEquals(expected, calculatorService.convertMoney(inputDetails).toString());
 
-    @AfterEach
-    public void restoreStreams() {
-        System.setOut(originalOut);
-        System.setErr(originalErr);
-    }
-
-    @Test
-    public void fxCalculator_withValidInput_returnsSuccess() {
-        FxCalculator.main(new String[]{"AUD", "100.00", "in", "NOK"});
-        assertEquals("AUD 100.00 = NOK 588.97", outContent.toString());
     }
 }

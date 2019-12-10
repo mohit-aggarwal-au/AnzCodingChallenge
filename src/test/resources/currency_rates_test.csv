@@ -1,0 +1,3 @@
+from_currency, to_currency, conversion_rate
+AUD, USD, 0.8371
+CAD, USD, 0.8711
