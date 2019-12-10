@@ -26,8 +26,8 @@ public class FxCalculator {
         InputDetails inputDetails;
         try {
             //Parse input parameters to inputDetails object that will be used by Calculator service to convert amount
-            Currency fromCurrency = Currency.valueOf(args[0].trim());
-            Currency toCurrency = Currency.valueOf(args[3].trim());
+            Currency fromCurrency = Currency.valueOf(args[0].trim().toUpperCase());
+            Currency toCurrency = Currency.valueOf(args[3].trim().toUpperCase());
             BigDecimal amountToBeConverted = new BigDecimal(args[1].trim()).setScale(2, RoundingMode.HALF_UP);
             inputDetails = new InputDetails(fromCurrency, toCurrency, amountToBeConverted);
 
