@@ -28,7 +28,4 @@ public class InputDetails {
         return amountToBeConverted;
     }
 
-    public void setAmountToBeConverted(BigDecimal amountToBeConverted) {
-        this.amountToBeConverted = amountToBeConverted;
-    }
 }

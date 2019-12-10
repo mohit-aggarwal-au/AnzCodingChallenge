@@ -29,15 +29,6 @@ public class ReadFileUtilTest {
     }
 
     @Test
-    public void getCrossCurrencyMap_emptyFile_throwsInvalidParameterException() {
-        InvalidParameterException exception = assertThrows(InvalidParameterException.class, () ->
-                        ReadFileUtil.getCrossCurrencyMap("cross_currency_empty_file_test.csv")
-                , "Expected to throw InvalidParameterException, but didn't throw it");
-        exception.getMessage();
-        assertTrue(exception.getMessage().contains("Input file:cross_currency_empty_file_test.csv format is not correct"));
-    }
-
-    @Test
     public void getCrossCurrencyMap_invalidFileWith1RowOnly_throwsInvalidParameterException() {
         InvalidParameterException exception = assertThrows(InvalidParameterException.class, () ->
                         ReadFileUtil.getCrossCurrencyMap("cross_currency_1_row_test.csv")

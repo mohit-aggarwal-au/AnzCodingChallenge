@@ -13,7 +13,7 @@ public class FxCalculator {
         InputDetails inputDetails = getInputDetails(args);
         if (inputDetails != null) {
             CalculatorService calculatorService = new CalculatorService();
-            BigDecimal convertedAmount = calculatorService.convertMoney(inputDetails);
+            BigDecimal convertedAmount = calculatorService.convertAmount(inputDetails);
             System.out.print(inputDetails.getFromCurrency() + " " + inputDetails.getAmountToBeConverted() + " = " + inputDetails.getToCurrency() + " " + convertedAmount);
         }
 
@@ -23,7 +23,7 @@ public class FxCalculator {
             throw new InvalidParameterException("Input parameters are not correct");
         }
 
-        InputDetails inputDetails = null;
+        InputDetails inputDetails;
         try {
             Currency fromCurrency = Currency.valueOf(args[0].trim());
             Currency toCurrency = Currency.valueOf(args[3].trim());
