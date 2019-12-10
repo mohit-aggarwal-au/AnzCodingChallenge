@@ -5,7 +5,7 @@ Some details about the program -
 1. Program contains a main class that will validate and consume input parameters, invoke calculator service and get the results
 2. Calculator service needs conversion rates, decimal point details and cross currency matrix. CalculatorService will read all these attributes from csv files present in resources folder. Idea is to separate business rules from code.
 3. Calculator service has been designed to calculate fx conversion recursively. Default currency for resolving cross currency conversions is USD. For using any other currency, an entry has to be made in the csv file - cross_currency.csv
-4. New currencies and conversion rates can be added to csv files and Currency enum. However, since program is using a recursive function, it is imperative to write test cases for new currencies, otherwise without valid conversion_rate & cross_currency entries, program may fall never ending loop.
+4. New currencies and conversion rates can be added to csv files and Currency enum. However, since program is using a recursive function, it is imperative to write test cases for new currencies, otherwise without valid conversion_rate & cross_currency entries, program may fall in to never ending loop.
 5. For the sake of simplicity, Spring is not used.
 6. Code coverage stands at 100% for branch and 96% for line. Test coverage report can be obtained by running command - gradlew clean build. Report will be available at location - build/jacocoHtml/index.html
 
