@@ -22,6 +22,5 @@ public class CalculatorServiceTest {
         BigDecimal amountToBeConverted = new BigDecimal(amount).setScale(2, RoundingMode.HALF_UP);
         InputDetails inputDetails  = new InputDetails(fromCurrency, toCurrency, amountToBeConverted);
         assertEquals(expected, calculatorService.convertAmount(inputDetails).toString());
-
     }
 }

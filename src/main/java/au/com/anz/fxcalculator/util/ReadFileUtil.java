@@ -19,6 +19,9 @@ import java.util.Map;
 
 public class ReadFileUtil {
 
+    private static final String COMMA = ",";
+
+    // Code to load currency_rate values from csv file to map in memory
     public static Map<String, BigDecimal> getCurrencyRateMap(String fileName) {
         Map<String, BigDecimal> currencyRateMap = new HashMap<>();
         List<String> lines = getFileContentList(fileName);
@@ -34,6 +37,7 @@ public class ReadFileUtil {
         return currencyRateMap;
     }
 
+    // Code to load cross_currency values from csv file to map in memory
     public static Map<String, Currency> getCrossCurrencyMap(String fileName) {
         Map<String, Currency> crossCurrencyMap = new HashMap<>();
         List<String> lines = getFileContentList(fileName);
@@ -49,7 +53,7 @@ public class ReadFileUtil {
         return crossCurrencyMap;
     }
 
-
+    //Code to load currency_decimal_points values from csv file to map in memory
     public static Map<Currency, Integer> getCurrencyDecimalPoints(String fileName) {
         Map<Currency, Integer> currencyDecimalPointsMap = new HashMap<>();
         List<String> lines = getFileContentList(fileName);
@@ -64,7 +68,7 @@ public class ReadFileUtil {
     }
 
     private static String[] getLineContent(String line, int expectedParameters, String fileName) {
-        String[] lineContent = line.split(Utility.COMMA);
+        String[] lineContent = line.split(COMMA);
         if (lineContent.length != expectedParameters) {
             throw new InvalidParameterException(String.format("Exception occurred while parsing transactions file:%s file format is not correct", fileName));
         }
@@ -80,9 +84,11 @@ public class ReadFileUtil {
             }
             Path path = Paths.get(resourceURL.toURI());
             lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+            //csv file need to have at least 1 data row besides header row
             if (lines.size() < 2) {
                 throw new InvalidParameterException(String.format("Input file:%s format is not correct", fileName));
             }
+            //removing header of csv file
             lines.remove(0);
 
         } catch (IOException | URISyntaxException exception) {
