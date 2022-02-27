@@ -1,5 +1,7 @@
 # AnzCodingChallenge
 
+Problem statment given in the pdf file - tech-programming-test-fxcalculator-1-0-7.pdf
+
 Some details about the program -
 
 1. Program contains a main class that will validate and consume input parameters, invoke calculator service and get the results
